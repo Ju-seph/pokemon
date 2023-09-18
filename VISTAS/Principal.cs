@@ -1,5 +1,6 @@
 ﻿using PokeApiNet;
 using pokemon.CONTROLADOR;
+using pokemon.OBJETO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,73 +15,122 @@ namespace pokemon.VISTAS
 {
     public partial class Principal : Form
     {
-        
         Ctl_pokemon ctl_pokemon = new Ctl_pokemon();
+
+        public static string usuario;
+        private int score = 0;
+        private string pokemon;
+        private Usuario user;
+
+
 
         public Principal()
         {
             InitializeComponent();
 
-            obtener_pikachu_aleatorio();
+            LBL_USUARIO.Text = usuario;
+
+            user =  Inicio.ctl_usuario.Buscar_Usuario(usuario);
+
+            LBL_SCORE.Text = "Score: " + score;
+
+            ver_pokemon();
+            
         }
 
-        public async Task obtener_pikachu_nombre()
+        public async Task ver_pokemon()
         {
-            Pokemon pk = await ctl_pokemon.get_pokemonAsync("pikachu");
 
-            IMAGEN.LoadAsync(pk.Sprites.Other.OfficialArtwork.FrontDefault);
+            Pokemon[] pk = await ctl_pokemon.get_ale_pokemon();
+
+            Random ale = new Random();
+            int num = ale.Next(0, pk.Length);
+            IMG_POKEMON.LoadAsync(pk[num].Sprites.Other.OfficialArtwork.FrontDefault);
+            pokemon = pk[num].Name;
+
+            BTN_OPC1.Text = pk[0].Name;
+            BTN_OPC2.Text = pk[1].Name;
+            BTN_OPC3.Text = pk[2].Name;
 
         }
 
-        public async Task obtener_pikachu_aleatorio()
+        private void BTN_OPC1_Click(object sender, EventArgs e)
         {
+            update_score(BTN_OPC1.Text);
+            ver_pokemon();
+        }
 
-            Random r = new Random();
-            int aleatorio = r.Next(1,100);
+        private void BTN_OPC2_Click(object sender, EventArgs e)
+        {
+            update_score(BTN_OPC2.Text);
+            ver_pokemon();
+        }
 
-            Pokemon pk = await ctl_pokemon.get_pokemonAsync(aleatorio);
+        private void BTN_OPC3_Click(object sender, EventArgs e)
+        {
+            update_score(BTN_OPC3.Text);
+            ver_pokemon();
+        }
 
-            IMAGEN.LoadAsync(pk.Sprites.Other.OfficialArtwork.FrontDefault);
+        public void update_score(string texto_boton)
+        {
+            if (texto_boton.Equals(pokemon))
+            {
+                score += 10;
 
-            LBL_NOMBRE.Text = pk.Name;
+                LBL_SCORE.Text = "Score: " + score;
+
+            }
+            else
+            {
+                Perdiste();
+            }
+
 
         }
 
-        private void Principal_KeyDown(object sender, KeyEventArgs e)
+        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            int actualX = LBL_NOMBRE.Location.X;
-            int actualY = LBL_NOMBRE.Location.Y;
+
+            DialogResult result = MessageBox.Show("¿Estás Seguro de Salir?", "ADVERTENCIA", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 
-            switch (e.KeyCode)
+            if(result.Equals(DialogResult.Yes))
             {
 
-                case Keys.Up:
-                    LBL_NOMBRE.Location = new Point(actualX, actualY-5);
-                    break;
-
-                case Keys.Down:
-                    LBL_NOMBRE.Location = new Point(actualX, actualY+5);
-                    break;
-
-                case Keys.Left:
-                    LBL_NOMBRE.Location = new Point(actualX - 5, actualY);
-                    break;
-
-                case Keys.Right:
-
-
-                    if(actualX != Location.X)
-                    {
-
-                        LBL_NOMBRE.Location = new Point(actualX + 5, actualY);
-                    }
-
-                    break;
+                Perdiste();
 
             }
 
 
         }
+
+
+        private void Perdiste()
+        {
+            MessageBox.Show("PERDISTE");
+
+            if (user != null)
+            {
+                user.Puntuacion = score;
+                int id = Inicio.ctl_usuario.Id_Usuario(usuario);
+                Inicio.ctl_usuario.Editar_Usuario(id, user);
+
+            }
+            else
+            {
+                user = new Usuario();
+                user.Nombre = usuario;
+                user.Puntuacion = score;
+                Inicio.ctl_usuario.Add_Usuario(user);
+            }
+
+            Dispose();
+            Puntajes p = new Puntajes();
+            p.Show();
+
+        }
+
+
     }
 }

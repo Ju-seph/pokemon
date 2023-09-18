@@ -8,6 +8,9 @@ namespace pokemon
 {
     internal static class Program
     {
+
+        public static Inicio form; 
+
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -16,7 +19,7 @@ namespace pokemon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Inicio());
+            Application.Run(form = new Inicio());
         }
     }
 }

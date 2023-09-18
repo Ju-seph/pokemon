@@ -15,6 +15,22 @@ namespace pokemon.VISTAS
         public Puntajes()
         {
             InitializeComponent();
+
+            Inicio.ctl_usuario.Ver_Resultados(TABLA);
+
+        }
+
+        private void BTN_INICIO_Click(object sender, EventArgs e)
+        {
+            Dispose();
+            Program.form.Show();
+        }
+
+        private void Puntajes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            Program.form.Show();
+
         }
     }
 }
