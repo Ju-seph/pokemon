@@ -112,18 +112,25 @@ namespace pokemon.VISTAS
 
             if (user != null)
             {
-                user.Puntuacion = score;
+                if(user.Puntuacion < score) 
+                { 
+                    user.Puntuacion = score;
+                }
                 int id = Inicio.ctl_usuario.Id_Usuario(usuario);
                 Inicio.ctl_usuario.Editar_Usuario(id, user);
 
             }
             else
             {
-                user = new Usuario();
-                user.Nombre = usuario;
-                user.Puntuacion = score;
+                user = new Usuario
+                {
+                    Nombre = usuario,
+                    Puntuacion = score
+                };
                 Inicio.ctl_usuario.Add_Usuario(user);
             }
+
+            Inicio.ctl_usuario.Guardar_Archivo();
 
             Dispose();
             Puntajes p = new Puntajes();

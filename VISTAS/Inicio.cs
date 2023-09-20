@@ -25,6 +25,10 @@ namespace pokemon
 
             BTN_INICIAR.Enabled = false;
 
+            ctl_usuario.CrearCarpeta();
+
+            ctl_usuario.Cargar_Archivo();
+
         }
 
         private void BTN_INICIAR_Click_1(object sender, EventArgs e)

@@ -1,6 +1,8 @@
 ﻿using PokeApiNet;
+using pokemon.OBJETO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +71,7 @@ namespace pokemon.CONTROLADOR
             return numeros;
 
         }
+
 
     }
 }
