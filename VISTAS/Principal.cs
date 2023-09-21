@@ -1,6 +1,7 @@
 ﻿using PokeApiNet;
 using pokemon.CONTROLADOR;
 using pokemon.OBJETO;
+using pokemon.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,8 +23,6 @@ namespace pokemon.VISTAS
         private string pokemon;
         private Usuario user;
 
-
-
         public Principal()
         {
             InitializeComponent();
@@ -41,10 +40,21 @@ namespace pokemon.VISTAS
         public async Task ver_pokemon()
         {
 
+            IMG_POKEMON.Image = Resources.aleatorio;
+            LBL_POKEMON.Text = "-";
+            BTN_OPC1.Text = "-";
+            BTN_OPC2.Text = "-";
+            BTN_OPC3.Text = "-";
+
+            BTN_OPC1.Enabled = false; 
+            BTN_OPC2.Enabled = false;
+            BTN_OPC3.Enabled = false;
+
             Pokemon[] pk = await ctl_pokemon.get_ale_pokemon();
 
             Random ale = new Random();
             int num = ale.Next(0, pk.Length);
+
             IMG_POKEMON.LoadAsync(pk[num].Sprites.Other.OfficialArtwork.FrontDefault);
             pokemon = pk[num].Name;
 
@@ -52,33 +62,43 @@ namespace pokemon.VISTAS
             BTN_OPC2.Text = pk[1].Name;
             BTN_OPC3.Text = pk[2].Name;
 
+            BTN_OPC1.Enabled = true;
+            BTN_OPC2.Enabled = true;
+            BTN_OPC3.Enabled = true;
+
         }
 
-        private void BTN_OPC1_Click(object sender, EventArgs e)
+        private async void BTN_OPC1_Click(object sender, EventArgs e)
         {
             update_score(BTN_OPC1.Text);
-            ver_pokemon();
+            await ver_pokemon();
         }
 
-        private void BTN_OPC2_Click(object sender, EventArgs e)
+        private async void BTN_OPC2_Click(object sender, EventArgs e)
         {
             update_score(BTN_OPC2.Text);
-            ver_pokemon();
+            await ver_pokemon();
         }
 
-        private void BTN_OPC3_Click(object sender, EventArgs e)
+        private async void BTN_OPC3_Click(object sender, EventArgs e)
         {
             update_score(BTN_OPC3.Text);
-            ver_pokemon();
+            await ver_pokemon();
         }
 
         public void update_score(string texto_boton)
         {
+
+            LBL_POKEMON.Text = pokemon;
+
             if (texto_boton.Equals(pokemon))
             {
                 score += 10;
 
                 LBL_SCORE.Text = "Score: " + score;
+
+                Notificacion noti = new Notificacion(true);
+                noti.ShowDialog();
 
             }
             else
@@ -108,7 +128,9 @@ namespace pokemon.VISTAS
 
         private void Perdiste()
         {
-            MessageBox.Show("PERDISTE");
+
+            Notificacion noti = new Notificacion(false);
+            noti.ShowDialog();
 
             if (user != null)
             {

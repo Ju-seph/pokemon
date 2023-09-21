@@ -113,7 +113,7 @@
             this.BTN_OPC3.Location = new System.Drawing.Point(3, 355);
             this.BTN_OPC3.Name = "BTN_OPC3";
             this.BTN_OPC3.Size = new System.Drawing.Size(162, 170);
-            this.BTN_OPC3.TabIndex = 2;
+            this.BTN_OPC3.TabIndex = 0;
             this.BTN_OPC3.Text = "-";
             this.BTN_OPC3.UseVisualStyleBackColor = true;
             this.BTN_OPC3.Click += new System.EventHandler(this.BTN_OPC3_Click);
@@ -125,7 +125,7 @@
             this.BTN_OPC2.Location = new System.Drawing.Point(3, 179);
             this.BTN_OPC2.Name = "BTN_OPC2";
             this.BTN_OPC2.Size = new System.Drawing.Size(162, 170);
-            this.BTN_OPC2.TabIndex = 1;
+            this.BTN_OPC2.TabIndex = 0;
             this.BTN_OPC2.Text = "-";
             this.BTN_OPC2.UseVisualStyleBackColor = true;
             this.BTN_OPC2.Click += new System.EventHandler(this.BTN_OPC2_Click);
@@ -204,6 +204,7 @@
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Principal_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
