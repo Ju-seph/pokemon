@@ -75,6 +75,8 @@ namespace pokemon.CONTROLADOR
             {
                 Directory.CreateDirectory(ruta);
 
+                File.Create(ruta + "\\usuarios.txt").Close();
+
             }
 
         }
