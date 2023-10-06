@@ -26,6 +26,8 @@ namespace pokemon.VISTAS
         public Principal()
         {
             InitializeComponent();
+            
+
 
             LBL_USUARIO.Text = usuario;
 
@@ -56,11 +58,11 @@ namespace pokemon.VISTAS
             int num = ale.Next(0, pk.Length);
 
             IMG_POKEMON.LoadAsync(pk[num].Sprites.Other.OfficialArtwork.FrontDefault);
-            pokemon = pk[num].Name;
+            pokemon = pk[num].Name.ToUpper();
 
-            BTN_OPC1.Text = pk[0].Name;
-            BTN_OPC2.Text = pk[1].Name;
-            BTN_OPC3.Text = pk[2].Name;
+            BTN_OPC1.Text = pk[0].Name.ToUpper();
+            BTN_OPC2.Text = pk[1].Name.ToUpper();
+            BTN_OPC3.Text = pk[2].Name.ToUpper();
 
             BTN_OPC1.Enabled = true;
             BTN_OPC2.Enabled = true;
@@ -160,6 +162,9 @@ namespace pokemon.VISTAS
 
         }
 
+        private void Principal_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

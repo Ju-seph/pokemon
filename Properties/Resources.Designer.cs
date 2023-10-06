@@ -93,6 +93,16 @@ namespace pokemon.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pokeball_print_monn_print {
+            get {
+                object obj = ResourceManager.GetObject("pokeball-print-monn-print", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pokemon1 {
             get {
                 object obj = ResourceManager.GetObject("pokemon1", resourceCulture);

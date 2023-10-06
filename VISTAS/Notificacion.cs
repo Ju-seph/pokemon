@@ -51,5 +51,10 @@ namespace pokemon.VISTAS
         {
             Dispose();
         }
+
+        private void IMAGEN_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

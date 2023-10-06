@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pokemon.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace pokemon.VISTAS
 {
@@ -18,7 +20,9 @@ namespace pokemon.VISTAS
 
             Inicio.ctl_usuario.Ver_Resultados(TABLA);
 
-        }
+            }
+
+
 
         private void BTN_INICIO_Click(object sender, EventArgs e)
         {
@@ -30,6 +34,16 @@ namespace pokemon.VISTAS
         {
 
             Program.form.Show();
+
+        }
+
+        private void LBL_PUNTAJES_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TABLA_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
